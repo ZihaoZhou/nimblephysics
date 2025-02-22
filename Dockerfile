@@ -1,10 +1,11 @@
 # Dockerfile
 FROM python:3.11-slim AS builder
 
-# Install system dependencies
+# Install system dependencies including build-essential
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
 # Install poetry and add to PATH
@@ -42,10 +43,10 @@ RUN mkdir -p /app/config
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV PORT=8000
 
 # Expose port
-EXPOSE 8000
+EXPOSE 8070
+EXPOSE 8080
 
 # Command to run the application
 CMD ["python", "test.py"]
